@@ -1,0 +1,19 @@
+name: GitHub Organization User Activity Report
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This line is optional, it schedules the job to run daily at midnight
+jobs:
+  check_inactive_users:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: GitHub Organization User Activity Report
+        uses: peter-murray/inactive-users-action@v1
+        with:
+          token: ${{ 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 }}  # Ensure you have set this secret in your GitHub repo settings
+          outputDir: ${{ github.workspace }}  # Default output directory
+          organization: 'RocketManOrganization'  # Replace with your actual organization name
+          activity_days: 30  # Default is 30 days, modify if needed
+          octokit_max_retries: 15  # Default is 15, adjust as necessary
